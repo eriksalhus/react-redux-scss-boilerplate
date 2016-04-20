@@ -1,29 +1,32 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import MapComponent from './MapComponent.jsx';
+import './AppComponent.scss';
 
 class AppComponent extends React.Component {
+
   constructor(props) {
     super(props);
-    this.onParkHandler = this.onParkHandler.bind(this);
-    this.onFindAutomobileHandler = this.onFindAutomobileHandler.bind(this);
+    this.onSaveHandler = this.onSaveHandler.bind(this);
+    this.onCancelHandler = this.onCancelHandler.bind(this);
   }
 
-  onParkHandler() {
-    this.props.dispatch({type: 'PARK_AUTOMOBILE'});
+  onSaveHandler() {
+    this.props.dispatch({type: 'SAVE'});
   }
 
-  onFindAutomobileHandler() {
-    this.props.dispatch({type: 'FIND_AUTOMOBILE'});
+  onCancelHandler() {
+    this.props.dispatch({type: 'CANCEL'});
   }
 
   render() {
     return (
-      <div>
-        <p>It is working!</p>
-        <button onClick={this.onParkHandler}>Park</button>
-        <button onClick={this.onFindAutomobileHandler}>Find</button>
-        <MapComponent />
+      <div id="AppComponent">
+        <p>This is working better!</p>
+
+        <p>This is awsm!</p>
+
+        <button className="primary-btn" onClick={this.onSaveHandler}>Save</button>
+        <button className="secondary-btn" onClick={this.onCancelHandler}>Cancel</button>
       </div>
     );
   }
@@ -31,7 +34,7 @@ class AppComponent extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.user,
+    user: state.user
   };
 }
 
@@ -39,5 +42,5 @@ export default connect(mapStateToProps)(AppComponent);
 
 
 AppComponent.propTypes = {
-  dispatch: React.PropTypes.func,
+  dispatch: React.PropTypes.func
 };

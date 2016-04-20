@@ -1,21 +1,19 @@
 import { combineReducers } from 'redux';
 
-function automobile(state = {}, action) {
+function user(state = {}, action) {
   switch (action.type) {
-    case 'PARK_AUTOMOBILE':
+    case 'SAVE':
       return Object.assign({}, state, {
-        driver: action.username,
-        date_parked: action.date_parked,
+        userSaved: true,
       });
-    case 'GEOLOCATION_RECEIVED':
+    case 'CANCEL':
       return Object.assign({}, state, {
-        lat: action.lat,
-        lon: action.lon,
+        userCancelled: true
       });
   }
   return state;
 }
 
-const rootReducer = combineReducers({ automobile });
+const rootReducer = combineReducers({ user });
 
 export default rootReducer;

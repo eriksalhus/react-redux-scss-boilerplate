@@ -1,0 +1,24 @@
+#AppComponent {
+  p {
+    font-weight: bold;
+    font-size: 25px;
+  }
+
+  button {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 0;
+    margin: .5em;
+    padding: .5em 1em;
+
+  }
+
+  button.secondary-btn {
+    background-color: cornflowerblue;
+  }
+
+  button.primary-btn {
+    background-color: hotpink;
+  }
+}
