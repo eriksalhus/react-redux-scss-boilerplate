@@ -4,43 +4,44 @@ import './AppComponent.scss';
 
 class AppComponent extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.onSaveHandler = this.onSaveHandler.bind(this);
-    this.onCancelHandler = this.onCancelHandler.bind(this);
-  }
+	constructor(props) {
+		super(props);
+		this.state = {todo:''};
+	}
 
-  onSaveHandler() {
-    this.props.dispatch({type: 'SAVE'});
-  }
+	addTodo(todo) {
+		this.props.dispatch({
+			type: 'ADD_TODO',
+			todo: {completed: false, todo}
+		});
+		this.setState({todo:''});
+	}
 
-  onCancelHandler() {
-    this.props.dispatch({type: 'CANCEL'});
-  }
+	render() {
+		return (
+			<div id="AppComponent">
+				<input ref={(ref) => this._input = ref} value={this.state.todo} onChange={event => this.setState({todo: event.target.value})}/>
+				<button className="primary-btn" onClick={() => this.addTodo(this._input.value)}>Add</button>
 
-  render() {
-    return (
-      <div id="AppComponent">
-        <p>This is working better!</p>
+				<ul>
+					{this.props.todos && this.props.todos.map((todo, index) =>
+						<li key={index}>{todo.todo}</li>)}
+				</ul>
 
-        <p>This is awsm!</p>
-
-        <button className="primary-btn" onClick={this.onSaveHandler}>Save</button>
-        <button className="secondary-btn" onClick={this.onCancelHandler}>Cancel</button>
-      </div>
-    );
-  }
+			</div>
+		);
+	}
 }
 
 function mapStateToProps(state) {
-  return {
-    user: state.user
-  };
+	return {
+		todos: state.todos.todos
+	};
 }
 
 export default connect(mapStateToProps)(AppComponent);
 
 
 AppComponent.propTypes = {
-  dispatch: React.PropTypes.func
+	dispatch: React.PropTypes.func
 };

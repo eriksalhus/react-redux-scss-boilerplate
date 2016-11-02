@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
-function user(state = {}, action) {
-  switch (action.type) {
-    case 'SAVE':
-      return Object.assign({}, state, {
-        userSaved: true,
-      });
-    case 'CANCEL':
-      return Object.assign({}, state, {
-        userCancelled: true
-      });
-  }
-  return state;
+function todos(state = {todos:[]}, action) {
+	switch (action.type) {
+		case 'ADD_TODO':
+			return Object.assign({}, state, {
+				todos: [...state.todos, action.todo]
+			});
+	}
+	return state;
 }
 
-const rootReducer = combineReducers({ user });
+const rootReducer = combineReducers({
+	todos,
+	routing: routerReducer
+});
 
 export default rootReducer;
